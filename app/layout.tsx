@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 // Setup Font Sans (Inter) - Untuk teks menu & deskripsi agar mudah dibaca
@@ -35,6 +36,7 @@ export default function RootLayout({
         className={`${inter.variable} ${playfair.variable} antialiased bg-cream-50 text-coffee-900 font-sans`}
       >
         {children}
+        <Analytics />
       </body>
     </html>
   );
