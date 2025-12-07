@@ -1,26 +1,104 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* --- DEFINISI WARNA (Langsung di sini agar terbaca oleh @apply) --- */
+  
+  /* Primary: Coffee Bean */
+  --color-coffee-50: #f7f5f3;
+  --color-coffee-100: #efeae6;
+  --color-coffee-200: #e0d6ce;
+  --color-coffee-300: #cabbad;
+  --color-coffee-400: #ac907d;
+  --color-coffee-500: #927360;
+  --color-coffee-600: #75594a;
+  --color-coffee-700: #61483e;
+  --color-coffee-800: #523e37;
+  --color-coffee-900: #4a3b32;
+  --color-coffee-950: #2c211b;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Secondary: Cream */
+  --color-cream-50: #fcfbf9;
+  --color-cream-100: #f6f3ed;
+  --color-cream-200: #ede6d8;
+  --color-cream-300: #e1d2bc;
+  --color-cream-400: #d2b99a;
+  --color-cream-500: #c59f7b;
+  --color-cream-600: #b88963;
+  --color-cream-700: #9a6e4f;
+  --color-cream-800: #7f5a43;
+  --color-cream-900: #674a39;
+  --color-cream-950: #37261d;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Accent: Sage */
+  --color-sage-50: #f4f7f2;
+  --color-sage-100: #e6efe2;
+  --color-sage-200: #cde2c4;
+  --color-sage-300: #a7cc98;
+  --color-sage-400: #8a9a5b;
+  --color-sage-500: #648745;
+  --color-sage-600: #4d6d34;
+  --color-sage-700: #3e572b;
+  --color-sage-800: #334626;
+  --color-sage-900: #2b3b22;
+  --color-sage-950: #162110;
+
+  /* Fonts */
+  --font-serif: var(--font-playfair), serif;
+  --font-sans: var(--font-inter), sans-serif;
+
+  /* Animations */
+  --animate-float: float 6s ease-in-out infinite;
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
   }
 }
 
+/* --- BASE STYLES --- */
+:root {
+  --foreground-rgb: 74, 59, 50; 
+  --background-rgb: 252, 251, 249; 
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(var(--foreground-rgb));
+  background: var(--background-rgb);
+  scroll-behavior: smooth; 
+}
+
+/* --- COMPONENTS LAYER --- */
+@layer components {
+  /* Efek Kaca (Glassmorphism) */
+  .glass {
+    @apply backdrop-blur-md border border-white/20 shadow-lg;
+    background-color: rgba(255, 255, 255, 0.6);
+  }
+  
+  /* Efek Kaca Gelap - Perbaikan di sini: Hapus opacity modifier (/10) sementara jika masih error, 
+     atau gunakan warna solid dulu untuk debugging. Tapi dengan @theme di atas, ini harusnya aman. */
+  .glass-dark {
+    @apply backdrop-blur-md border shadow-lg text-coffee-950;
+    border-color: var(--color-coffee-900); /* Fallback manual jika @apply gagal parsing opacity */
+    background-color: rgba(239, 234, 230, 0.7);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-cream-100);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-coffee-300);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-coffee-400);
 }
