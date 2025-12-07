@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Clock, Wifi, BatteryCharging, ArrowUpRight, Coffee, Star, MapPin } from 'lucide-react';
+import { Wifi, BatteryCharging, ArrowUpRight, Coffee, Star, MapPin } from 'lucide-react';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import { Button } from './components/ui/Button';
@@ -14,7 +14,7 @@ export default function Home() {
       <Navbar />
 
       {/* --- HERO SECTION --- */}
-      <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
+      <section className="relative min-h-screen flex items-center pt-24 lg:pt-20 overflow-hidden pb-12 lg:pb-0">
         
         {/* Background Noise Texture */}
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
@@ -26,12 +26,14 @@ export default function Home() {
         <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
           
           {/* Left Content (Typography) */}
-          <div className="lg:col-span-7 space-y-8 text-center lg:text-left pt-10 lg:pt-0">
+          <div className="lg:col-span-7 space-y-6 text-center lg:text-left pt-4 lg:pt-0 flex flex-col items-center lg:items-start">
+            
+            {/* Badge 24 Hours */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mx-auto lg:mx-0"
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm"
             >
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -40,6 +42,7 @@ export default function Home() {
               <span className="text-xs font-medium tracking-widest text-cream-200">OPEN 24 HOURS</span>
             </motion.div>
 
+            {/* Judul Utama */}
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -50,20 +53,48 @@ export default function Home() {
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cream-100 via-cream-200 to-coffee-400">Coffee Club.</span>
             </motion.h1>
 
+            {/* --- VISUAL ABSTRACT (MOBILE ONLY) --- */}
+            {/* Ini akan muncul DI ANTARA Judul dan Deskripsi hanya di layar kecil (lg:hidden) */}
+            <div className="relative w-full h-[350px] lg:hidden my-4">
+               {/* Card 1 Mobile */}
+               <motion.div 
+                  initial={{ opacity: 0, scale: 0.8, rotate: -3 }}
+                  animate={{ opacity: 1, scale: 1, rotate: -3 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  className="absolute top-0 right-8 w-48 h-64 bg-coffee-800 rounded-2xl border border-white/10 shadow-2xl overflow-hidden z-0"
+                >
+                  <div className="absolute inset-0 bg-cover bg-center opacity-80" style={{ backgroundImage: "url('/images/suasana-indoor.jpg')" }} />
+               </motion.div>
+               {/* Card 2 Mobile */}
+               <motion.div 
+                  initial={{ opacity: 0, scale: 0.8, rotate: 3 }}
+                  animate={{ opacity: 1, scale: 1, rotate: 3 }}
+                  transition={{ duration: 0.8, delay: 0.3 }}
+                  className="absolute top-16 left-8 w-48 h-64 bg-coffee-900 rounded-2xl border border-white/10 shadow-2xl overflow-hidden z-10"
+                >
+                  <div className="absolute inset-0 bg-cover bg-center opacity-70" style={{ backgroundImage: "url('/images/suasana-outdoor.jpg')" }} />
+                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/20">
+                     <span className="text-white/80 font-serif text-4xl font-bold">24/7</span>
+                  </div>
+               </motion.div>
+            </div>
+
+            {/* Deskripsi */}
             <motion.p 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-lg text-cream-200/60 max-w-lg leading-relaxed mx-auto lg:mx-0"
+              className="text-lg text-cream-200/60 max-w-lg leading-relaxed"
             >
               Bukan sekadar tempat ngopi. Ini markas buat kamu yang produktif di malam hari, pecinta skripsi, dan pencari inspirasi tanpa batas waktu.
             </motion.p>
 
+            {/* Tombol CTA */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="flex flex-wrap gap-4 pt-4 justify-center lg:justify-start"
+              className="flex flex-wrap gap-4 pt-2 justify-center lg:justify-start"
             >
               <Link href="/menu">
                 <Button variant="primary" className="rounded-full px-8">
@@ -78,15 +109,15 @@ export default function Home() {
             </motion.div>
           </div>
 
-          {/* Right Content (Visual Abstract) */}
-          {/* FIX: Menghapus class 'hidden lg:block' agar tampil di mobile, dan menyesuaikan tinggi/margin */}
-          <div className="lg:col-span-5 relative h-[450px] lg:h-[500px] w-full mt-12 lg:mt-0">
+          {/* --- VISUAL ABSTRACT (DESKTOP ONLY) --- */}
+          {/* Ini akan muncul di KANAN layar hanya di layar besar (hidden lg:block) */}
+          <div className="hidden lg:col-span-5 relative h-[500px] lg:block">
             {/* Card 1: Indoor Ambience (Utama) */}
             <motion.div 
               initial={{ opacity: 0, scale: 0.8, rotate: -6 }}
               animate={{ opacity: 1, scale: 1, rotate: -6 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="absolute top-0 right-4 lg:top-10 lg:right-10 w-56 h-72 lg:w-64 lg:h-80 bg-coffee-800 rounded-3xl border border-white/10 shadow-2xl overflow-hidden group"
+              className="absolute top-10 right-10 w-64 h-80 bg-coffee-800 rounded-3xl border border-white/10 shadow-2xl overflow-hidden group"
             >
               <div 
                 className="absolute inset-0 bg-cover bg-center opacity-80 group-hover:opacity-100 transition-opacity duration-500 scale-110"
@@ -104,7 +135,7 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.8, rotate: 6 }}
               animate={{ opacity: 1, scale: 1, rotate: 6 }}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="absolute top-28 left-4 lg:top-40 lg:left-10 w-56 h-72 lg:w-64 lg:h-80 bg-coffee-900 rounded-3xl border border-white/10 shadow-2xl overflow-hidden z-10 group"
+              className="absolute top-40 left-10 w-64 h-80 bg-coffee-900 rounded-3xl border border-white/10 shadow-2xl overflow-hidden z-10 group"
             >
               <div 
                 className="absolute inset-0 bg-cover bg-center opacity-60 group-hover:opacity-80 transition-opacity duration-500"
@@ -112,7 +143,7 @@ export default function Home() {
               />
               {/* Overlay Text */}
               <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/30 backdrop-blur-[2px] group-hover:backdrop-blur-none transition-all duration-500">
-                 <span className="text-white/80 font-serif text-5xl lg:text-6xl font-bold">24/7</span>
+                 <span className="text-white/80 font-serif text-6xl font-bold">24/7</span>
                  <span className="text-white/60 text-sm tracking-[0.3em] uppercase mt-2">Open Daily</span>
               </div>
               
